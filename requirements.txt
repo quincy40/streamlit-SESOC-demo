@@ -1,3 +1,5 @@
-altair
+geopy
 pandas
 streamlit
+folium
+numpy
