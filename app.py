@@ -13,7 +13,7 @@ def get_location(address):
         return location.latitude, location.longitude
     return None, None
 
-def create_map(latitude, longitude, radius=3000, zoom_start=13):
+def create_map(latitude, longitude, radius=4000, zoom_start=12):
     """ Create a Folium map with a circle """
     map_ = folium.Map(location=[latitude, longitude], zoom_start=zoom_start)
     folium.Marker([latitude, longitude]).add_to(map_)
@@ -34,8 +34,8 @@ st.title('Quincy\'s demo for SESOC')
 # Initialize session state
 if 'latitude' not in st.session_state or 'longitude' not in st.session_state:
     st.session_state['latitude'], st.session_state['longitude'] = -36.8529193, 174.7694239
-    st.session_state['radius'] = 3000  # default radius in meters
-    st.session_state['zoom'] = 13     # default zoom level
+    st.session_state['radius'] = 4000  # default radius in meters
+    st.session_state['zoom'] = 12     # default zoom level
 
 #Words for sidebar
 st.sidebar.markdown('This sample script is a Proof-of-concept demonstrating the ability to search for an address, then running simply geopy python function to conduct some calculations. ')
