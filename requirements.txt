@@ -2,4 +2,4 @@ geopy
 pandas
 streamlit
 folium
-numpy
+streamlit_folium
