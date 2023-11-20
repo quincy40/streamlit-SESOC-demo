@@ -4,3 +4,4 @@ streamlit
 folium
 streamlit_folium
 streamlit_extras
+numpy
