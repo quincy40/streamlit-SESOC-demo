@@ -3,6 +3,8 @@ from geopy.geocoders import Nominatim
 import folium
 from streamlit_folium import folium_static
 from streamlit_extras.buy_me_a_coffee import button
+import numpy as np
+import pandas as pd
 
 # Initialize the geolocator
 geolocator = Nominatim(user_agent="SESOC-QM-Test")
@@ -31,14 +33,13 @@ def create_map(latitude, longitude, radius=4000, zoom_start=12):
 # Title for your app
 st.title('Quincy\'s demo for SESOC')
 
-
 # Initialize session state
 if 'latitude' not in st.session_state or 'longitude' not in st.session_state:
     st.session_state['latitude'], st.session_state['longitude'] = -36.8529193, 174.7694239
     st.session_state['radius'] = 4000  # default radius in meters
     st.session_state['zoom'] = 12     # default zoom level
 
-#Words for sidebar
+# Words for sidebar
 st.sidebar.markdown('This sample script is a Proof-of-concept demonstrating the ability to search for an address, then running simply geopy python function to conduct some calculations. ')
 st.sidebar.markdown('Two ways to use this page.   1) Use the search box to select a location of interest, or 2) double click on the map to find the GPS coordinate, then insert that into search box')
 st.sidebar.header("Map controls")
@@ -58,6 +59,10 @@ if address:
     if latitude and longitude:
         st.session_state['latitude'], st.session_state['longitude'] = latitude, longitude
 
+# Add a coffee button for demonstration
+with st.sidebar:
+    add_button=button(username="fake-username", floating=False, width=221)
+
 # Display the map
 map_ = create_map(st.session_state.latitude, st.session_state.longitude, st.session_state.radius, st.session_state.zoom)
 folium_static(map_)
@@ -66,5 +71,12 @@ folium_static(map_)
 st.write(f"GPS Coordinates of selected point: Latitude {st.session_state['latitude']}, Longitude {st.session_state['longitude']}")
 
 
-with st.sidebar:
-    add_button=button(username="fake-username", floating=False, width=221)
+# Have some demo using numpy
+st.divider()
+st.text('use numpy to generate some random numbers, then use panda to arrange into dataframe')
+#np.random.seed(0) <-- if you want to test with same numbers...  
+
+df = pd.DataFrame(np.random.randn(5, 3), columns=list('ABC'))
+
+st.dataframe(df)
+st.line_chart(df)
