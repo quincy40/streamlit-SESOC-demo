@@ -2,6 +2,7 @@ import streamlit as st
 from geopy.geocoders import Nominatim
 import folium
 from streamlit_folium import folium_static
+from streamlit_extras.buy_me_a_coffee import button
 
 # Initialize the geolocator
 geolocator = Nominatim(user_agent="SESOC-QM-Test")
@@ -63,3 +64,7 @@ folium_static(map_)
 
 # Display GPS coordinates
 st.write(f"GPS Coordinates of selected point: Latitude {st.session_state['latitude']}, Longitude {st.session_state['longitude']}")
+
+
+with st.sidebar:
+    add_button=button(username="fake-username", floating=False, width=221)
